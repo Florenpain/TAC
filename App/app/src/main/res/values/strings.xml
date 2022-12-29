@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">League of Legends</string>
+    <string name="tab_text_1">Champions</string>
+    <string name="tab_text_2">Favoris</string>
+</resources>
