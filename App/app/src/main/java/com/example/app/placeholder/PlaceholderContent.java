@@ -38,7 +38,13 @@ public class PlaceholderContent {
     }
 
     private static PlaceholderItem createPlaceholderItem(int position) {
-        return new PlaceholderItem(String.valueOf(position), "Champion " + position, makeDetails(position));
+        ArrayList<String> tags = new ArrayList<String>();
+        return new PlaceholderItem(String.valueOf(position),
+                "Champion " + position,
+                "title " + position,
+                "blurb" + position,
+                "image" + position,
+                tags );
     }
 
     private static String makeDetails(int position) {
@@ -55,18 +61,24 @@ public class PlaceholderContent {
      */
     public static class PlaceholderItem {
         public final String id;
-        public final String content;
-        public final String details;
+        public final String name;
+        public final String title;
+        public final String blurb;
+        public final String image;
+        public final List<String> tags;
 
-        public PlaceholderItem(String id, String content, String details) {
+        public PlaceholderItem(String id, String name, String title, String blurb, String image, List<String> tags) {
             this.id = id;
-            this.content = content;
-            this.details = details;
+            this.name = name;
+            this.title = title;
+            this.blurb = blurb;
+            this.image = image;
+            this.tags = tags;
         }
 
         @Override
         public String toString() {
-            return content;
+            return name;
         }
     }
 }
