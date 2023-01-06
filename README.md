@@ -16,7 +16,7 @@ Ce dépôt contient le projet à réaliser pour l'UE TAC de l'Université de Lil
 |------------------------------------------------------|-------------|------|--------------|
 | Affichage des items en liste                         | @Florenpain | :x:  |  |
 | Affichage des items en grille                        | @Florenpain | :x:  |  |
-| Transition de liste à grille et inversement          | @Florenpain | :x:  |  |
+| Transition de liste à grille et inversement          | @Florenpain | :white_check_mark:  |  |
 | Affichage des détails d'un item (texte + image)      | @Florenpain | :x:  |  |
 | Bouton d'actions (ajout en favori, suppression etc.) | @Florenpain | :x:  |  |
 | Stockage des données en local                        | @Florenpain | :x:  |  |

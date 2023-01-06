@@ -1,5 +1,7 @@
 package com.example.app.placeholder;
 
+import com.example.Champion;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,12 +18,12 @@ public class PlaceholderContent {
     /**
      * An array of sample (placeholder) items.
      */
-    public static final List<PlaceholderItem> ITEMS = new ArrayList<PlaceholderItem>();
+    public static final List<Champion> LISTE_CHAMPIONS = new ArrayList<Champion>();
 
     /**
      * A map of sample (placeholder) items, by ID.
      */
-    public static final Map<String, PlaceholderItem> ITEM_MAP = new HashMap<String, PlaceholderItem>();
+    public static final Map<String, Champion> CHAMPIONS_MAP = new HashMap<String, Champion>();
 
     private static final int COUNT = 25;
 
@@ -32,19 +34,18 @@ public class PlaceholderContent {
         }
     }
 
-    private static void addItem(PlaceholderItem item) {
-        ITEMS.add(item);
-        ITEM_MAP.put(item.id, item);
+    private static void addItem(Champion champion) {
+        LISTE_CHAMPIONS.add(champion);
+        CHAMPIONS_MAP.put(champion.getId(), champion);
     }
 
-    private static PlaceholderItem createPlaceholderItem(int position) {
+    private static Champion createPlaceholderItem(int position) {
         ArrayList<String> tags = new ArrayList<String>();
-        return new PlaceholderItem(String.valueOf(position),
-                "Champion " + position,
-                "title " + position,
-                "blurb" + position,
-                "image" + position,
-                tags );
+        tags.add("Fighter");
+        Champion champion = new Champion();
+        champion.setId(""+position);
+        champion.setName("Champion " + position);
+        return champion;
     }
 
     private static String makeDetails(int position) {
@@ -54,31 +55,5 @@ public class PlaceholderContent {
             builder.append("\nMore details information here.");
         }
         return builder.toString();
-    }
-
-    /**
-     * A placeholder item representing a piece of content.
-     */
-    public static class PlaceholderItem {
-        public final String id;
-        public final String name;
-        public final String title;
-        public final String blurb;
-        public final String image;
-        public final List<String> tags;
-
-        public PlaceholderItem(String id, String name, String title, String blurb, String image, List<String> tags) {
-            this.id = id;
-            this.name = name;
-            this.title = title;
-            this.blurb = blurb;
-            this.image = image;
-            this.tags = tags;
-        }
-
-        @Override
-        public String toString() {
-            return name;
-        }
     }
 }
