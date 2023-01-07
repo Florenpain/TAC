@@ -1,8 +1,10 @@
 package com.example.app;
 
 import android.os.Bundle;
+import android.provider.ContactsContract;
 
 import com.example.app.api.Champion;
+import com.example.app.api.DataDragon;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -14,7 +16,12 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+
+import io.reactivex.Single;
+import io.reactivex.disposables.CompositeDisposable;
+import retrofit2.Call;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,11 +29,15 @@ public class MainActivity extends AppCompatActivity {
     private TabLayout mTabLayout;
     private FragmentStateAdapter mAdapter;
     private SwitchCompat mSwitch;
+    private Collection<Champion> mChampions;
+    private CompositeDisposable compositeDisposable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        compositeDisposable = new CompositeDisposable();
 
         mViewPager = findViewById(R.id.viewPager2);
         mTabLayout = findViewById(R.id.tabLayout);
@@ -41,15 +52,12 @@ public class MainActivity extends AppCompatActivity {
                 case 0:
                     tab.setText("Champions");
                     break;
-
                 case 1:
                     tab.setText("Favoris");
                     break;
-
                 default:
                     tab.setText("Champions");
                     break;
-
             }
         });
         tabLayoutMediator.attach();
@@ -63,7 +71,15 @@ public class MainActivity extends AppCompatActivity {
             mViewPager.setAdapter(mAdapter);
         });
 
-    }
+        mChampions = new ArrayList<>();
+
+        Single<DataDragon> mDataDragon = RiotCalls.getInstance().getMyApi().getChampions()
+                .subscribeOn(io.reactivex.schedulers.Schedulers.io())
+                .timeout(10, java.util.concurrent.TimeUnit.SECONDS);
+
+        mChampions = mDataDragon.blockingGet().getData().values();
+
+        }
 
     private static class ChampionPagerAdapter extends FragmentStateAdapter {
 
