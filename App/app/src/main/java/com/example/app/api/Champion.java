@@ -1,13 +1,11 @@
-package com.example;
+package com.example.app.api;
 
-import com.example.Stats;
-
-import java.util.List;
-import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-@Generated("jsonschema2pojo")
+import java.util.List;
+
+
 public class Champion {
 
     @SerializedName("version")
@@ -30,10 +28,10 @@ public class Champion {
     private String blurb;
     @SerializedName("info")
     @Expose
-    private com.example.Info info;
+    private Info info;
     @SerializedName("image")
     @Expose
-    private com.example.Image image;
+    private Image image;
     @SerializedName("tags")
     @Expose
     private List<String> tags = null;

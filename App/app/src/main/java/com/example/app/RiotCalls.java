@@ -1,13 +1,7 @@
 package com.example.app;
 
-import com.example.Champion;
-
-import java.util.List;
-import java.util.Observable;
-
-import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
@@ -17,13 +11,31 @@ public class RiotCalls {
 
     private static Retrofit retrofit;
 
-    public static Retrofit getClient(){
+    private static RiotCalls instance = null;
+
+    private RiotService myAPI;
+
+
+    public RiotCalls(){
         if(retrofit == null){
             retrofit = new Retrofit.Builder()
                     .baseUrl(dataDragonUrl)
                     .addConverterFactory(GsonConverterFactory.create())
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .build();
+            myAPI = retrofit.create(RiotService.class);
         }
-        return retrofit;
     }
+
+    public static RiotCalls getInstance() {
+        if (instance == null) {
+            instance = new RiotCalls();
+        }
+        return instance;
+    }
+
+    public RiotService getMyApi() {
+        return myAPI;
+    }
+
 }

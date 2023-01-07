@@ -1,26 +1,23 @@
 package com.example.app;
 
-import com.example.Champion;
+import com.example.app.api.Champion;
+import com.example.app.api.ChampionDetails;
 
 import java.util.List;
 
-
-import retrofit2.Call;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
+import io.reactivex.Single;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
 public interface RiotService {
 
     @GET("/data/fr_FR/champion.json")
-    Call<List<Champion>> getChampions();
-
-    /*
+    Single<List<Champion>> getChampions();
 
     @GET("/data/fr_FR/champion/{champion}.json")
-    Call<ChampionDetails> getChampion(@Path("champion") String champion);
+    Single<ChampionDetails> getChampion(@Path("champion") String champion);
+
+    /*
 
     @GET("/img/champion/{champion}.png")
     Call<ResponseBody> getChampionImage(@Path("champion") String champion);
@@ -48,5 +45,7 @@ public interface RiotService {
 
     @GET("/img/ability/{ability}.png")
     Call<ResponseBody> getAbilityImage(@Path("ability") String ability);
-*/
+
+    */
+
 }

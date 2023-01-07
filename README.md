@@ -9,6 +9,7 @@ Ce dépôt contient le projet à réaliser pour l'UE TAC de l'Université de Lil
 # API utilisée 
 
 *[riotgames](https://developer.riotgames.com/)*
+*[champion](https://ddragon.leagueoflegends.com/cdn/12.23.1/data/fr_FR/champion.json)*
 
 # Planification 
 
