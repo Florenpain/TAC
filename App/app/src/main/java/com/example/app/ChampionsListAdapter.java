@@ -54,8 +54,8 @@ public class ChampionsListAdapter extends RecyclerView.Adapter<ChampionsListAdap
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            nameTextView = itemView.findViewById(R.id.nomChampion);
-            imageView = itemView.findViewById(R.id.imageChampion);
+            nameTextView = itemView.findViewById(R.id.champion_name);
+            imageView = itemView.findViewById(R.id.champion_image);
         }
 
         public void bind(Champion champion) {
