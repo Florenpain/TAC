@@ -65,14 +65,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        // Afficher les 10 premiers champions dans la console
-        /*
-        Iterator it = mChampions.iterator();
-        for (int i = 0; i < 10; i++) {
-            Champion champion = (Champion) it.next();
-            System.out.println(champion.getName() + champion.getTitle() + champion.getBlurb() + champion.getTags());
-        }
-        */
     }
 
     private static class ChampionPagerAdapter extends FragmentStateAdapter {

@@ -1,10 +1,7 @@
 package com.example.app;
 
-import com.example.app.api.Champion;
-import com.example.app.api.ChampionDetails;
 import com.example.app.api.DataDragon;
-
-import java.util.List;
+import com.example.app.api.DataDragonDetails;
 
 import io.reactivex.Single;
 import retrofit2.http.GET;
@@ -16,7 +13,7 @@ public interface RiotService {
     Single<DataDragon> getChampions();
 
     @GET("data/fr_FR/champion/{champion}.json")
-    Single<ChampionDetails> getChampion(@Path("champion") String champion);
+    Single<DataDragonDetails> getChampion(@Path("champion") String champion);
 
     /*
 

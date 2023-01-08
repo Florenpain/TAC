@@ -1,18 +1,23 @@
 package com.example.app;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.app.api.Champion;
+import com.example.app.ui.main.ChampionDetailsFragment;
 
 import java.util.Collection;
 import java.util.List;
@@ -22,7 +27,6 @@ public class ChampionsListAdapter extends RecyclerView.Adapter<ChampionsListAdap
     private Collection<Champion> champions;
     private boolean isGrid;
     private Context context;
-    private String urlDataDragon = "https://ddragon.leagueoflegends.com/cdn/12.23.1/img/champion/";
 
     public ChampionsListAdapter(Collection<Champion> champions, boolean isGrid, Context context) {
         this.champions = champions;
@@ -46,9 +50,6 @@ public class ChampionsListAdapter extends RecyclerView.Adapter<ChampionsListAdap
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Champion champion = (Champion) champions.toArray()[position];
         holder.bind(champion);
-        Glide.with(context)
-                .load(urlDataDragon + ((Champion) champions.toArray()[position]).getImage().getFull())
-                .into(holder.imageView);
     }
 
     @Override
@@ -63,6 +64,8 @@ public class ChampionsListAdapter extends RecyclerView.Adapter<ChampionsListAdap
         private TextView titleTextView;
         private TextView tagsTextView;
         private boolean isGrid;
+        private Button buttonAddFavorite;
+        private String urlDataDragon = "https://ddragon.leagueoflegends.com/cdn/12.23.1/img/champion/";
 
         public ViewHolder(@NonNull View itemView, boolean isGrid) {
             super(itemView);
@@ -70,11 +73,15 @@ public class ChampionsListAdapter extends RecyclerView.Adapter<ChampionsListAdap
             imageView = itemView.findViewById(R.id.champion_image);
             titleTextView = itemView.findViewById(R.id.champion_title);
             tagsTextView = itemView.findViewById(R.id.champion_tags);
+            buttonAddFavorite = itemView.findViewById(R.id.add_favorite_button);
         }
 
         public void bind(Champion champion) {
             nameTextView.setText(champion.getName());
             imageView.setImageResource(R.drawable.ic_launcher_background);
+            Glide.with(itemView.getContext())
+                    .load(urlDataDragon + champion.getImage().getFull())
+                    .into(imageView);
             if (!isGrid) {
                 titleTextView.setText(champion.getTitle());
                 if (champion.getTags().size() > 1) {
@@ -83,6 +90,21 @@ public class ChampionsListAdapter extends RecyclerView.Adapter<ChampionsListAdap
                     tagsTextView.setText(champion.getTags().get(0));
                 }
             }
+            buttonAddFavorite.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //TODO: add to favorites
+                }
+            });
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(itemView.getContext(), ChampionDetailsActivity.class);
+                    intent.putExtra("championId", champion.getId());
+                    itemView.getContext().startActivity(intent);
+                }
+            });
         }
     }
 }

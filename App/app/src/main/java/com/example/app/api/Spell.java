@@ -21,16 +21,16 @@ public class Spell {
     private String tooltip;
     @SerializedName("maxrank")
     @Expose
-    private Integer maxrank;
+    private Float maxrank;
     @SerializedName("cooldown")
     @Expose
-    private List<Integer> cooldown = null;
+    private List<Float> cooldown = null;
     @SerializedName("cooldownBurn")
     @Expose
     private String cooldownBurn;
     @SerializedName("cost")
     @Expose
-    private List<Integer> cost = null;
+    private List<Float> cost = null;
     @SerializedName("costBurn")
     @Expose
     private String costBurn;
@@ -51,7 +51,7 @@ public class Spell {
     private String maxammo;
     @SerializedName("range")
     @Expose
-    private List<Integer> range = null;
+    private List<Float> range = null;
     @SerializedName("rangeBurn")
     @Expose
     private String rangeBurn;
@@ -94,19 +94,19 @@ public class Spell {
         this.tooltip = tooltip;
     }
 
-    public Integer getMaxrank() {
+    public Float getMaxrank() {
         return maxrank;
     }
 
-    public void setMaxrank(Integer maxrank) {
+    public void setMaxrank(Float maxrank) {
         this.maxrank = maxrank;
     }
 
-    public List<Integer> getCooldown() {
+    public List<Float> getCooldown() {
         return cooldown;
     }
 
-    public void setCooldown(List<Integer> cooldown) {
+    public void setCooldown(List<Float> cooldown) {
         this.cooldown = cooldown;
     }
 
@@ -118,11 +118,11 @@ public class Spell {
         this.cooldownBurn = cooldownBurn;
     }
 
-    public List<Integer> getCost() {
+    public List<Float> getCost() {
         return cost;
     }
 
-    public void setCost(List<Integer> cost) {
+    public void setCost(List<Float> cost) {
         this.cost = cost;
     }
 
@@ -174,11 +174,11 @@ public class Spell {
         this.maxammo = maxammo;
     }
 
-    public List<Integer> getRange() {
+    public List<Float> getRange() {
         return range;
     }
 
-    public void setRange(List<Integer> range) {
+    public void setRange(List<Float> range) {
         this.range = range;
     }
 

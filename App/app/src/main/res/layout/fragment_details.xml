@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ID: "/>
+
+    <TextView
+        android:id="@+id/key"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Key: "/>
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name: "/>
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Title: "/>
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/skins"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Skins: "/>
+
+    <TextView
+        android:id="@+id/lore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lore: "/>
+
+    <TextView
+        android:id="@+id/blurb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Blurb: "/>
+
+    <TextView
+        android:id="@+id/allytips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Allytips: "/>
+
+    <TextView
+        android:id="@+id/enemytips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enemytips: "/>
+
+    <TextView
+        android:id="@+id/tags"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tags: "/>
+
+    <TextView
+        android:id="@+id/partype"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Partype: "/>
+
+    <TextView
+        android:id="@+id/info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Info: "/>
+
+    <TextView
+        android:id="@+id/stats"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stats: "/>
+
+    <TextView
+        android:id="@+id/spells"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Spells: "/>
+
+    <TextView
+        android:id="@+id/passive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Passive: "/>
+
+    <TextView
+        android:id="@+id/recommended"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Recommended: "/>
+
+</LinearLayout>
+
+
