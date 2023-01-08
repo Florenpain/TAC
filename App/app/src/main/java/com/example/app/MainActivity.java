@@ -17,6 +17,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import io.reactivex.Single;
@@ -26,10 +27,10 @@ import retrofit2.Call;
 public class MainActivity extends AppCompatActivity {
 
     private ViewPager2 mViewPager;
-    private TabLayout mTabLayout;
     private FragmentStateAdapter mAdapter;
     private SwitchCompat mSwitch;
     private Collection<Champion> mChampions;
+    private Collection<Champion> mFavoris;
     private CompositeDisposable compositeDisposable;
 
     @Override
@@ -38,59 +39,49 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         compositeDisposable = new CompositeDisposable();
+        Single<DataDragon> mDataDragon = RiotCalls.getInstance().getMyApi().getChampions()
+                .subscribeOn(io.reactivex.schedulers.Schedulers.io())
+                .timeout(10, java.util.concurrent.TimeUnit.SECONDS);
+        mChampions = mDataDragon.blockingGet().getData().values();
+
+        mFavoris = new ArrayList<>();
 
         mViewPager = findViewById(R.id.viewPager2);
-        mTabLayout = findViewById(R.id.tabLayout);
-        mSwitch = findViewById(R.id.switch1);
-
-        mAdapter = new ChampionPagerAdapter(this, false);
-
+        mAdapter = new ChampionPagerAdapter(this, false, mChampions, mFavoris);
         mViewPager.setAdapter(mAdapter);
 
-        TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(mTabLayout, mViewPager, (tab, position) -> {
-            switch (position) {
-                case 0:
-                    tab.setText("Champions");
-                    break;
-                case 1:
-                    tab.setText("Favoris");
-                    break;
-                default:
-                    tab.setText("Champions");
-                    break;
-            }
-        });
-        tabLayoutMediator.attach();
-
+        mSwitch = findViewById(R.id.switch1);
         mSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                mAdapter = new ChampionPagerAdapter(this, true);
+                mAdapter = new ChampionPagerAdapter(this, true, mChampions, mFavoris);
             } else {
-                mAdapter = new ChampionPagerAdapter(this, false);
+                mAdapter = new ChampionPagerAdapter(this, false, mChampions, mFavoris);
             }
             mViewPager.setAdapter(mAdapter);
         });
 
-        mChampions = new ArrayList<>();
 
-        Single<DataDragon> mDataDragon = RiotCalls.getInstance().getMyApi().getChampions()
-                .subscribeOn(io.reactivex.schedulers.Schedulers.io())
-                .timeout(10, java.util.concurrent.TimeUnit.SECONDS);
-
-        mChampions = mDataDragon.blockingGet().getData().values();
-
+        // Afficher les 10 premiers champions dans la console
+        /*
+        Iterator it = mChampions.iterator();
+        for (int i = 0; i < 10; i++) {
+            Champion champion = (Champion) it.next();
+            System.out.println(champion.getName() + champion.getTitle() + champion.getBlurb() + champion.getTags());
         }
+        */
+    }
 
     private static class ChampionPagerAdapter extends FragmentStateAdapter {
 
-        private List<Champion> champions = new ArrayList<>();
-        private List<Champion> favoris = new ArrayList<>();
+        private Collection<Champion> champions;
+        private Collection<Champion> favoris;
         private boolean isGrid;
 
-        public ChampionPagerAdapter(AppCompatActivity activity, boolean isGrid) {
-
+        public ChampionPagerAdapter(AppCompatActivity activity, boolean isGrid, Collection<Champion> champions, Collection<Champion> favoris) {
             super(activity);
             this.isGrid = isGrid;
+            this.champions = champions;
+            this.favoris = favoris;
         }
 
         @NonNull

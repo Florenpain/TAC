@@ -12,10 +12,10 @@ import retrofit2.http.Path;
 
 public interface RiotService {
 
-    @GET("/data/fr_FR/champion.json")
+    @GET("data/fr_FR/champion.json")
     Single<DataDragon> getChampions();
 
-    @GET("/data/fr_FR/champion/{champion}.json")
+    @GET("data/fr_FR/champion/{champion}.json")
     Single<ChampionDetails> getChampion(@Path("champion") String champion);
 
     /*

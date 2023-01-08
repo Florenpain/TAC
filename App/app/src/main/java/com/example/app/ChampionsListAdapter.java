@@ -11,27 +11,34 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.app.api.Champion;
 
+import java.util.Collection;
 import java.util.List;
 
 public class ChampionsListAdapter extends RecyclerView.Adapter<ChampionsListAdapter.ViewHolder> {
 
-    private List<Champion> champions;
+    private Collection<Champion> champions;
+    private boolean isGrid;
 
-    public ChampionsListAdapter(List<Champion> champions) {
+    public ChampionsListAdapter(Collection<Champion> champions, boolean isGrid) {
         this.champions = champions;
+        this.isGrid = isGrid;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_item_list, parent, false);
-        return new ViewHolder(view);
+        if (isGrid) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_item2, parent, false);
+            return new ViewHolder(view);
+        } else {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_item, parent, false);
+            return new ViewHolder(view);
+        }
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Champion champion = champions.get(position);
+        Champion champion = (Champion) champions.toArray()[position];
         holder.bind(champion);
     }
 
@@ -42,8 +49,8 @@ public class ChampionsListAdapter extends RecyclerView.Adapter<ChampionsListAdap
 
     static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView nameTextView;
         private ImageView imageView;
+        private TextView nameTextView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RiotCalls {
 
-    public static String dataDragonUrl = "https://ddragon.leagueoflegends.com/cdn/12.23.1";
+    public static String dataDragonUrl = "https://ddragon.leagueoflegends.com/cdn/12.23.1/";
     private static Retrofit retrofit;
     private static RiotCalls instance = null;
     private RiotService myAPI;
