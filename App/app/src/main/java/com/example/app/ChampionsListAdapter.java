@@ -35,10 +35,10 @@ public class ChampionsListAdapter extends RecyclerView.Adapter<ChampionsListAdap
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (isGrid) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_item2, parent, false);
-            return new ViewHolder(view);
+            return new ViewHolder(view, isGrid);
         } else {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_item, parent, false);
-            return new ViewHolder(view);
+            return new ViewHolder(view, isGrid);
         }
     }
 
@@ -60,16 +60,29 @@ public class ChampionsListAdapter extends RecyclerView.Adapter<ChampionsListAdap
 
         private ImageView imageView;
         private TextView nameTextView;
+        private TextView titleTextView;
+        private TextView tagsTextView;
+        private boolean isGrid;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, boolean isGrid) {
             super(itemView);
             nameTextView = itemView.findViewById(R.id.champion_name);
             imageView = itemView.findViewById(R.id.champion_image);
+            titleTextView = itemView.findViewById(R.id.champion_title);
+            tagsTextView = itemView.findViewById(R.id.champion_tags);
         }
 
         public void bind(Champion champion) {
             nameTextView.setText(champion.getName());
             imageView.setImageResource(R.drawable.ic_launcher_background);
+            if (!isGrid) {
+                titleTextView.setText(champion.getTitle());
+                if (champion.getTags().size() > 1) {
+                    tagsTextView.setText(champion.getTags().get(0) + " / " + champion.getTags().get(1));
+                } else {
+                    tagsTextView.setText(champion.getTags().get(0));
+                }
+            }
         }
     }
 }

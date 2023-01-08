@@ -28,4 +28,14 @@
         android:layout_gravity="center"
         android:layout_marginTop="2dp" />
 
+    <TextView
+        android:id="@+id/champion_title"
+        android:layout_width="0dp"
+        android:layout_height="0dp" />
+
+    <TextView
+        android:id="@+id/champion_tags"
+        android:layout_width="0dp"
+        android:layout_height="0dp" />
+
 </LinearLayout>
