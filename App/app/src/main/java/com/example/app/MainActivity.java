@@ -1,5 +1,6 @@
 package com.example.app;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 
@@ -32,11 +33,14 @@ public class MainActivity extends AppCompatActivity {
     private Collection<Champion> mChampions;
     private Collection<Champion> mFavoris;
     private CompositeDisposable compositeDisposable;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        context = getApplicationContext() ;
 
         compositeDisposable = new CompositeDisposable();
         Single<DataDragon> mDataDragon = RiotCalls.getInstance().getMyApi().getChampions()
@@ -47,15 +51,15 @@ public class MainActivity extends AppCompatActivity {
         mFavoris = new ArrayList<>();
 
         mViewPager = findViewById(R.id.viewPager2);
-        mAdapter = new ChampionPagerAdapter(this, false, mChampions, mFavoris);
+        mAdapter = new ChampionPagerAdapter(this, false, mChampions, mFavoris, context);
         mViewPager.setAdapter(mAdapter);
 
         mSwitch = findViewById(R.id.switch1);
         mSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                mAdapter = new ChampionPagerAdapter(this, true, mChampions, mFavoris);
+                mAdapter = new ChampionPagerAdapter(this, true, mChampions, mFavoris, context);
             } else {
-                mAdapter = new ChampionPagerAdapter(this, false, mChampions, mFavoris);
+                mAdapter = new ChampionPagerAdapter(this, false, mChampions, mFavoris, context);
             }
             mViewPager.setAdapter(mAdapter);
         });
@@ -76,12 +80,14 @@ public class MainActivity extends AppCompatActivity {
         private Collection<Champion> champions;
         private Collection<Champion> favoris;
         private boolean isGrid;
+        private Context context;
 
-        public ChampionPagerAdapter(AppCompatActivity activity, boolean isGrid, Collection<Champion> champions, Collection<Champion> favoris) {
+        public ChampionPagerAdapter(AppCompatActivity activity, boolean isGrid, Collection<Champion> champions, Collection<Champion> favoris, Context context) {
             super(activity);
             this.isGrid = isGrid;
             this.champions = champions;
             this.favoris = favoris;
+            this.context = context;
         }
 
         @NonNull
@@ -89,9 +95,9 @@ public class MainActivity extends AppCompatActivity {
         public Fragment createFragment(int position) {
             switch (position) {
                 case 0:
-                    return ChampionsListFragment.newInstance(champions, isGrid);
+                    return ChampionsListFragment.newInstance(champions, isGrid, context);
                 case 1:
-                    return ChampionsListFragment.newInstance(favoris, isGrid);
+                    return ChampionsListFragment.newInstance(favoris, isGrid, context);
                 default:
                     throw new IllegalArgumentException("Invalid position: " + position);
             }

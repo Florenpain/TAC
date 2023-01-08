@@ -1,5 +1,6 @@
 package com.example.app;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -25,15 +26,17 @@ public class ChampionsListFragment extends Fragment {
     private ChampionsListAdapter adapter;
     private Collection<Champion> champions;
     private boolean isGrid;
+    private Context context;
 
     public ChampionsListFragment() {
         // Required empty public constructor
     }
 
-    public static ChampionsListFragment newInstance(Collection<Champion> champions, boolean isGrid) {
+    public static ChampionsListFragment newInstance(Collection<Champion> champions, boolean isGrid, Context context) {
         ChampionsListFragment fragment = new ChampionsListFragment();
         fragment.champions = champions;
         fragment.isGrid = isGrid;
+        fragment.context = context;
         return fragment;
     }
 
@@ -52,7 +55,7 @@ public class ChampionsListFragment extends Fragment {
         } else {
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         }
-        adapter = new ChampionsListAdapter(champions, isGrid);
+        adapter = new ChampionsListAdapter(champions, isGrid, context);
         recyclerView.setAdapter(adapter);
         return view;
     }

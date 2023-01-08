@@ -1,5 +1,6 @@
 package com.example.app;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.app.api.Champion;
 
 import java.util.Collection;
@@ -18,10 +21,13 @@ public class ChampionsListAdapter extends RecyclerView.Adapter<ChampionsListAdap
 
     private Collection<Champion> champions;
     private boolean isGrid;
+    private Context context;
+    private String urlDataDragon = "https://ddragon.leagueoflegends.com/cdn/12.23.1/img/champion/";
 
-    public ChampionsListAdapter(Collection<Champion> champions, boolean isGrid) {
+    public ChampionsListAdapter(Collection<Champion> champions, boolean isGrid, Context context) {
         this.champions = champions;
         this.isGrid = isGrid;
+        this.context = context;
     }
 
     @NonNull
@@ -40,6 +46,9 @@ public class ChampionsListAdapter extends RecyclerView.Adapter<ChampionsListAdap
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Champion champion = (Champion) champions.toArray()[position];
         holder.bind(champion);
+        Glide.with(context)
+                .load(urlDataDragon + ((Champion) champions.toArray()[position]).getImage().getFull())
+                .into(holder.imageView);
     }
 
     @Override

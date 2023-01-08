@@ -6,9 +6,8 @@
 
     <ImageView
         android:id="@+id/champion_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_launcher_background"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
         android:layout_gravity="center" />
 
     <TextView
@@ -27,6 +26,6 @@
         android:layout_height="wrap_content"
         android:text="Add to Favorites"
         android:layout_gravity="center"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="2dp" />
 
 </LinearLayout>
