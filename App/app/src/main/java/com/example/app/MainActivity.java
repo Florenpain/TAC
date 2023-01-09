@@ -10,6 +10,8 @@ import com.example.app.api.DataDragon;
 import com.example.app.database.Repository;
 import com.example.app.database.entity.ChampionEntity;
 import com.example.app.ui.main.MainViewModel;
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
@@ -36,7 +38,8 @@ import androidx.lifecycle.Observer;
 public class MainActivity extends AppCompatActivity {
 
     private ViewPager2 mViewPager;
-    private static ChampionPagerAdapter mAdapter;
+    private ChampionPagerAdapter mAdapter;
+    private TabLayout mtabLayout;
     private SwitchCompat mSwitch;
     private Collection<Champion> mChampions;
     private static List<ChampionEntity> mFavoris;
@@ -49,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         context = getApplicationContext() ;
-
 
         // On récupère les champions depuis l'API
         Single<DataDragon> mDataDragon = RiotCalls.getInstance().getMyApi().getChampions()
@@ -75,6 +77,12 @@ public class MainActivity extends AppCompatActivity {
         mViewPager = findViewById(R.id.viewPager2);
         mAdapter = new ChampionPagerAdapter(this, false, mChampions, mFavoris, context);
         mViewPager.setAdapter(mAdapter);
+        mtabLayout = findViewById(R.id.tabLayout);
+
+        // On gère les onglets
+        new TabLayoutMediator(mtabLayout, mViewPager,
+                (tab, position) -> tab.setText(mAdapter.getPageTitle(position))
+        ).attach();
 
 
         // On récupère le switch pour modifier l'affichage des champions (Grille ou Liste)
@@ -123,6 +131,17 @@ public class MainActivity extends AppCompatActivity {
         public int getItemCount() {
             return 2;
         }
+
+        public CharSequence getPageTitle(int position) {
+            switch (position) {
+                case 0:
+                    return "Champions";
+                case 1:
+                    return "Favoris";
+                default:
+                    throw new IllegalArgumentException("Invalid position: " + position);
+            }
+        }
     }
 
     public static Repository getRepository() {
@@ -137,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
         return mViewModel;
     }
 
-    public  static ChampionPagerAdapter getAdapter() {
+    public ChampionPagerAdapter getAdapter() {
         return mAdapter;
     }
 
