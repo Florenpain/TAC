@@ -25,7 +25,7 @@ public class FavorisListFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private FavorisListAdapter adapter;
-    private Collection<ChampionEntity> champions;
+    private List<ChampionEntity> champions;
     private boolean isGrid;
     private Context context;
 
@@ -33,7 +33,7 @@ public class FavorisListFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static FavorisListFragment newInstance(Collection<ChampionEntity> champions, boolean isGrid, Context context) {
+    public static FavorisListFragment newInstance(List<ChampionEntity> champions, boolean isGrid, Context context) {
         FavorisListFragment fragment = new FavorisListFragment();
         fragment.champions = champions;
         fragment.isGrid = isGrid;

@@ -107,10 +107,10 @@ public class ChampionsListAdapter extends RecyclerView.Adapter<ChampionsListAdap
                     System.out.println("championEntity :" + championEntity);
                     if (idList.contains(championEntity.getId())) {
                         Toast.makeText(v.getContext(), "Champion déjà dans les favoris", Toast.LENGTH_SHORT).show();
-
                     } else {
                         MainActivity.getViewModel().addChampion(championEntity);
                         Toast.makeText(v.getContext(), "Champion ajouté aux favoris", Toast.LENGTH_SHORT).show();
+
                     }
                 }
             });

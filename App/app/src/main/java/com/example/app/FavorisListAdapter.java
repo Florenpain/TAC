@@ -93,6 +93,8 @@ public class FavorisListAdapter extends RecyclerView.Adapter<FavorisListAdapter.
                 public void onClick(View v) {
                     Toast.makeText(v.getContext(), "Deleted", Toast.LENGTH_SHORT).show();
                     MainActivity.getRepository().deleteChampion(championEntity);
+                    // TODO: refresh the list
+
                 }
             });
 

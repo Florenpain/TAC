@@ -66,10 +66,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChanged(List<ChampionEntity> championEntities) {
                 mFavoris = championEntities;
-                /*
-                mAdapter = new ChampionPagerAdapter(MainActivity.this, false, mChampions, mFavoris, context);
-                mViewPager.setAdapter(mAdapter);
-                 */
+                mAdapter.setFavoris(championEntities);
             }
         });
 
@@ -89,9 +86,9 @@ public class MainActivity extends AppCompatActivity {
         mSwitch = findViewById(R.id.switch1);
         mSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                mAdapter = new ChampionPagerAdapter(this, true, mChampions, mFavoris, context);
+                mAdapter.setGrid(true);
             } else {
-                mAdapter = new ChampionPagerAdapter(this, false, mChampions, mFavoris, context);
+                mAdapter.setGrid(false);
             }
             mViewPager.setAdapter(mAdapter);
         });
@@ -141,6 +138,14 @@ public class MainActivity extends AppCompatActivity {
                 default:
                     throw new IllegalArgumentException("Invalid position: " + position);
             }
+        }
+
+        public void setGrid(boolean isGrid) {
+            this.isGrid = isGrid;
+        }
+
+        public void setFavoris(List<ChampionEntity> favoris) {
+            this.favoris = favoris;
         }
     }
 
