@@ -105,10 +105,6 @@ public class MainActivity extends AppCompatActivity {
             this.context = context;
         }
 
-        public void addFavori(ChampionEntity championEntity) {
-            this.favoris.add(championEntity);
-        }
-
         @NonNull
         @Override
         public Fragment createFragment(int position) {
