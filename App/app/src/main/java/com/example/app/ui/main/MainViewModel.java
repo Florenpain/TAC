@@ -4,22 +4,17 @@ import android.app.Application;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.arch.core.util.Function;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Transformations;
-import androidx.lifecycle.ViewModel;
 
 import com.example.app.database.Repository;
 import com.example.app.database.entity.ChampionEntity;
 
-import java.util.Collection;
 import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;

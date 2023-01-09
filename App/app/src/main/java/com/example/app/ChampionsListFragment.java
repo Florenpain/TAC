@@ -17,8 +17,6 @@ import android.view.ViewGroup;
 import com.example.app.api.Champion;
 
 import java.util.Collection;
-import java.util.List;
-
 
 public class ChampionsListFragment extends Fragment {
 

@@ -2,8 +2,6 @@ package com.example.app;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.example.app.api.Champion;
 import com.example.app.api.DataDragon;
@@ -17,8 +15,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
 
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
@@ -27,11 +23,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import java.util.Collection;
 import java.util.List;
 
-import io.reactivex.Observable;
 import io.reactivex.Single;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 
 import androidx.lifecycle.Observer;
 
@@ -74,15 +66,14 @@ public class MainActivity extends AppCompatActivity {
         mViewPager = findViewById(R.id.viewPager2);
         mAdapter = new ChampionPagerAdapter(this, false, mChampions, mFavoris, context);
         mViewPager.setAdapter(mAdapter);
-        mtabLayout = findViewById(R.id.tabLayout);
 
-        // On gère les onglets
+        // On associe les onglets au ViewPager2
+        mtabLayout = findViewById(R.id.tabLayout);
         new TabLayoutMediator(mtabLayout, mViewPager,
                 (tab, position) -> tab.setText(mAdapter.getPageTitle(position))
         ).attach();
 
-
-        // On récupère le switch pour modifier l'affichage des champions (Grille ou Liste)
+        // On récupère le bouton switch pour modifier l'affichage des champions (Grille ou Liste)
         mSwitch = findViewById(R.id.switch1);
         mSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
@@ -114,10 +105,10 @@ public class MainActivity extends AppCompatActivity {
         public Fragment createFragment(int position) {
             switch (position) {
                 case 0:
-                    Toast.makeText(context, "Champions", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(context, "Champions", Toast.LENGTH_SHORT).show();
                     return ChampionsListFragment.newInstance(champions, isGrid, context);
                 case 1:
-                    Toast.makeText(context, "Favoris", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(context, "Favoris", Toast.LENGTH_SHORT).show();
                     return FavorisListFragment.newInstance(favoris, isGrid, context);
                 default:
                     throw new IllegalArgumentException("Invalid position: " + position);
@@ -159,10 +150,6 @@ public class MainActivity extends AppCompatActivity {
 
     public static MainViewModel getViewModel() {
         return mViewModel;
-    }
-
-    public ChampionPagerAdapter getAdapter() {
-        return mAdapter;
     }
 
 }

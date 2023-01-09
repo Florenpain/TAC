@@ -14,7 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.app.api.Champion;
 import com.example.app.database.entity.ChampionEntity;
 
 import java.util.Collection;
@@ -88,6 +87,8 @@ public class FavorisListAdapter extends RecyclerView.Adapter<FavorisListAdapter.
                 titleTextView.setText(championEntity.getTitle());
                 tagsTextView.setText(championEntity.getTags());
             }
+
+            // Add a click listener to the button to delete the champion from the favorites
             buttonAddFavorite.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -98,6 +99,7 @@ public class FavorisListAdapter extends RecyclerView.Adapter<FavorisListAdapter.
                 }
             });
 
+            // Add a click listener to the image to open the champion details
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

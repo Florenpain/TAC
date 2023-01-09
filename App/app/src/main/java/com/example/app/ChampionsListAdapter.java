@@ -15,9 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.app.api.Champion;
-import com.example.app.database.Repository;
 import com.example.app.database.entity.ChampionEntity;
-import com.example.app.database.room.Database;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -95,16 +93,21 @@ public class ChampionsListAdapter extends RecyclerView.Adapter<ChampionsListAdap
                     tagsTextView.setText(champion.getTags().get(0));
                 }
             }
+            // Gestion du clic sur 'add to favorites'
             buttonAddFavorite.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     List<ChampionEntity> favoris = MainActivity.getFavoris();
                     List<String> idList = new ArrayList<>();
+
+                    // On récupère la liste des id des champions de la liste favoris
                     for (ChampionEntity championEntity : favoris) {
                         idList.add(championEntity.getId());
                     }
                     ChampionEntity championEntity = new ChampionEntity(champion.getId() ,champion.getName(), champion.getTitle(), champion.getImage().getFull(), champion.getTags().toString());
                     System.out.println("championEntity :" + championEntity);
+
+                    // Si le champion n'est pas déjà dans la liste des favoris
                     if (idList.contains(championEntity.getId())) {
                         Toast.makeText(v.getContext(), "Champion déjà dans les favoris", Toast.LENGTH_SHORT).show();
                     } else {
@@ -115,6 +118,7 @@ public class ChampionsListAdapter extends RecyclerView.Adapter<ChampionsListAdap
                 }
             });
 
+            // Gestion du clic sur un champion ( ouverture de la page détails )
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

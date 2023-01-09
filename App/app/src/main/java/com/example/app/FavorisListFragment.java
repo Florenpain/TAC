@@ -14,10 +14,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.app.api.Champion;
 import com.example.app.database.entity.ChampionEntity;
 
-import java.util.Collection;
 import java.util.List;
 
 
