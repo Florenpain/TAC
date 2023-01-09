@@ -11,7 +11,6 @@ import com.example.app.database.Repository;
 import com.example.app.database.entity.ChampionEntity;
 import com.example.app.ui.main.MainViewModel;
 
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
