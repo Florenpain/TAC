@@ -15,21 +15,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.app.api.Champion;
-import com.example.app.database.Repository;
 import com.example.app.database.entity.ChampionEntity;
-import com.example.app.database.room.Database;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
-public class ChampionsListAdapter extends RecyclerView.Adapter<ChampionsListAdapter.ViewHolder> {
+public class FavorisListAdapter extends RecyclerView.Adapter<FavorisListAdapter.ViewHolder> {
 
-    private Collection<Champion> champions;
+    private Collection<ChampionEntity> champions;
     private boolean isGrid;
     private Context context;
 
-    public ChampionsListAdapter(Collection<Champion> champions, boolean isGrid, Context context) {
+    public FavorisListAdapter(Collection<ChampionEntity> champions, boolean isGrid, Context context) {
         this.champions = champions;
         this.isGrid = isGrid;
         this.context = context;
@@ -49,8 +45,8 @@ public class ChampionsListAdapter extends RecyclerView.Adapter<ChampionsListAdap
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Champion champion = (Champion) champions.toArray()[position];
-        holder.bind(champion);
+        ChampionEntity championEntity = (ChampionEntity) champions.toArray()[position];
+        holder.bind(championEntity);
     }
 
     @Override
@@ -81,38 +77,22 @@ public class ChampionsListAdapter extends RecyclerView.Adapter<ChampionsListAdap
             buttonAddFavorite = itemView.findViewById(R.id.add_favorite_button);
         }
 
-        public void bind(Champion champion) {
-            nameTextView.setText(champion.getName());
+        public void bind(ChampionEntity championEntity) {
+            nameTextView.setText(championEntity.getName());
+            buttonAddFavorite.setText("delete from favorites");
             imageView.setImageResource(R.drawable.ic_launcher_background);
             Glide.with(itemView.getContext())
-                    .load(urlDataDragon + champion.getImage().getFull())
+                    .load(urlDataDragon + championEntity.getImage())
                     .into(imageView);
             if (!isGrid) {
-                titleTextView.setText(champion.getTitle());
-                if (champion.getTags().size() > 1) {
-                    tagsTextView.setText(champion.getTags().get(0) + " / " + champion.getTags().get(1));
-                } else {
-                    tagsTextView.setText(champion.getTags().get(0));
-                }
+                titleTextView.setText(championEntity.getTitle());
+                tagsTextView.setText(championEntity.getTags());
             }
             buttonAddFavorite.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    List<ChampionEntity> favoris = MainActivity.getFavoris();
-                    List<String> idList = new ArrayList<>();
-                    for (ChampionEntity championEntity : favoris) {
-                        idList.add(championEntity.getId());
-                    }
-                    ChampionEntity championEntity = new ChampionEntity(champion.getId() ,champion.getName(), champion.getTitle(), champion.getImage().getFull(), champion.getTags().toString());
-                    System.out.println("championEntity :" + championEntity);
-                    if (idList.contains(championEntity.getId())) {
-                        Toast.makeText(v.getContext(), "Champion déjà dans les favoris", Toast.LENGTH_SHORT).show();
-
-                    } else {
-                        MainActivity.getViewModel().addChampion(championEntity);
-                        MainActivity.getAdapter().addFavori(championEntity);
-                        Toast.makeText(v.getContext(), "Champion ajouté aux favoris", Toast.LENGTH_SHORT).show();
-                    }
+                    Toast.makeText(v.getContext(), "Deleted", Toast.LENGTH_SHORT).show();
+                    MainActivity.getRepository().deleteAll();
                 }
             });
 
@@ -120,7 +100,7 @@ public class ChampionsListAdapter extends RecyclerView.Adapter<ChampionsListAdap
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(itemView.getContext(), ChampionDetailsActivity.class);
-                    intent.putExtra("championId", champion.getId());
+                    intent.putExtra("championId", championEntity.getId());
                     itemView.getContext().startActivity(intent);
                 }
             });

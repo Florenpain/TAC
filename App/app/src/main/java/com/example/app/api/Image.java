@@ -1,8 +1,11 @@
 package com.example.app.api;
 
+import androidx.room.Entity;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+@Entity
 public class Image {
 
     @SerializedName("full")

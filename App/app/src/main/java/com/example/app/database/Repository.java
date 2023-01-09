@@ -2,7 +2,7 @@ package com.example.app.database;
 
 import android.app.Application;
 
-import com.example.app.api.Champion;
+import com.example.app.database.entity.ChampionEntity;
 import com.example.app.database.room.Database;
 import com.example.app.database.room.dao.ChampionDao;
 
@@ -18,18 +18,23 @@ public class Repository {
 
     public Repository(Application application) {
         myDatabase = Database.getDatabase(application);
-
         championDao = myDatabase.championDao();
     }
 
-    public void insert(Champion champion) {
+    public void insert(ChampionEntity championEntity) {
         Database.databaseWriteExecutor.execute(() -> {
-            championDao.insert(champion);
+            championDao.insert(championEntity);
         });
     }
 
-    public Observable<List<Champion>> getAllChampions() {
+    public Observable<List<ChampionEntity>> getAllChampions() {
         return myDatabase.championDao().getAllChampions();
+    }
+
+    public void deleteAll() {
+        Database.databaseWriteExecutor.execute(() -> {
+            championDao.deleteAll();
+        });
     }
 
 }
