@@ -37,4 +37,10 @@ public class Repository {
         });
     }
 
+    public void deleteChampion(ChampionEntity championEntity) {
+        Database.databaseWriteExecutor.execute(() -> {
+            championDao.deleteChampion(championEntity);
+        });
+    }
+
 }

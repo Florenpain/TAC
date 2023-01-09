@@ -24,4 +24,7 @@ public interface ChampionDao {
     @Query("DELETE FROM ChampionEntity")
     void deleteAll();
 
+    @Delete
+    void deleteChampion(ChampionEntity championEntity);
+
 }

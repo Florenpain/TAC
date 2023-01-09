@@ -92,7 +92,7 @@ public class FavorisListAdapter extends RecyclerView.Adapter<FavorisListAdapter.
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(v.getContext(), "Deleted", Toast.LENGTH_SHORT).show();
-                    MainActivity.getRepository().deleteAll();
+                    MainActivity.getRepository().deleteChampion(championEntity);
                 }
             });
 
