@@ -27,9 +27,13 @@ Ce dépôt contient le projet à réaliser pour l'UE [TAC](https://www.fil.univ-
 
 # Diagrammes
 
-*[Diagramme de séquence]()*
+Ces diagrammes ont été réalisés sur [diagrams.net](https://www.diagrams.net/).
 
-*[Diagramme de classes]()*
+Pour les visualiser, il faudra ainsi les ouvrir sur ce site.
+
+*[Diagramme de séquence](https://github.com/Florenpain/TAC/blob/main/DiagrammeS%C3%A9quence.drawio)*
+
+*[Diagramme de classes](https://github.com/Florenpain/TAC/blob/main/DiagrammeClasses.drawio)*
 
 # Planification 
 
