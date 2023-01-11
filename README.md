@@ -4,7 +4,9 @@ Ce dépôt contient le projet à réaliser pour l'UE [TAC](https://www.fil.univ-
 
 *[Lien du sujet](https://github.com/Florenpain/TAC/blob/main/CahierDesCharges.pdf)*
 
-*[Documentation Android]( https://developer.android.com/guide/index.html )*
+*[Documentation Android](https://developer.android.com/guide/index.html)*
+
+*[Documentation Technique](https://github.com/Florenpain/TAC/blob/main/documentationTechnique.pdf)*
 
 # Auteur 
 
@@ -22,6 +24,12 @@ Ce dépôt contient le projet à réaliser pour l'UE [TAC](https://www.fil.univ-
   - le nom du champion
 - L'onglet 'Favoris' permet d'afficher la liste des champions ajoutés en favoris
 - Ces champions favoris sont stockés en local
+
+# Diagrammes
+
+*[Diagramme de séquence]()*
+
+*[Diagramme de classes]()*
 
 # Planification 
 
