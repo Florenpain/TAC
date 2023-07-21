@@ -1,7 +1,5 @@
 # TAC
 
-Ce dépôt contient le projet à réaliser pour l'UE [TAC](https://www.fil.univ-lille.fr/portail/index.php?dipl=MInfo&sem=ES&ue=TAC&label=Pr%C3%A9sentation) de l'Université de Lille.
-
 *[Lien du sujet](https://github.com/Florenpain/TAC/blob/main/CahierDesCharges.pdf)*
 
 *[Documentation Android](https://developer.android.com/guide/index.html)*
